@@ -1,0 +1,55 @@
+{
+  "investors": {
+    "page": 1,
+    "limit": 10,
+    "totalCount": 100,
+    "investors": [
+      {
+        "id": 1,
+        "investor": {
+          "name": "TechStars",
+          "isInvestorApproved": true,
+          "image": "http://localhost:3000/images/company-logo.svg",
+          "additionalInfo": {
+            "website": "https://techstars.com",
+            "foundedYear": 2006
+          }
+        },
+        "hq": "United States of America",
+        "contact": "John Doe",
+        "notes": "Leading in tech investments.",
+        "investments": {
+          "total": 2323,
+          "recent": 1
+        },
+        "portfolio": {
+          "total": 1313,
+          "active": 5
+        }
+      },
+      {
+        "id": 2,
+        "investor": {
+          "name": "SeedCamp",
+          "isInvestorApproved": false,
+          "image": "http://localhost:3000/images/company-logo.svg",
+          "additionalInfo": {
+            "website": "https://seedcamp.coms",
+            "foundedYear": 2007
+          }
+        },
+        "hq": "United Kingdom",
+        "contact": "",
+        "notes": "",
+        "investments": {
+          "total": 2323,
+          "recent": 1
+        },
+        "portfolio": {
+          "total": 1313,
+          "active": 5
+        }
+      }
+    ]
+  }
+}
