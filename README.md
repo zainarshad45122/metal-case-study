@@ -59,4 +59,4 @@ To contribute to this project, fork the repository and create a new branch using
 
 ## Contact
 
-For any questions or suggestions, please feel free to contact us at [zainarhad45122@gmail.com].
+For any questions or suggestions, please feel free to contact us at zainarhad45122@gmail.com.
