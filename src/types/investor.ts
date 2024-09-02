@@ -30,17 +30,7 @@ export interface Investor {
   portfolio: number;
 }
 
-export interface InvestorData {
-  id: number;
-  investor: {
-    name: string;
-    isInvestorApproved: boolean;
-    image: string;
-    additionalInfo: AdditionalInfo;
-  };
-  hq: string;
-  contact: string;
-  notes: string;
+export interface InvestorData extends Omit<Investor, "investments" | "portfolio"> {
   investments: Portfolio;
   portfolio: Investments;
 }

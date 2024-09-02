@@ -13,6 +13,7 @@ const theme = createTheme( {
     },
   },
   typography: {
+    fontFamily: "CircularStd",
     h1: {
       fontSize: "22px",
       fontWeight: 450,

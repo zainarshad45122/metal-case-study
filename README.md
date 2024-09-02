@@ -1,46 +1,62 @@
-# Getting Started with Create React App
+# METAL-CASE-STUDY
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Brief Description
 
-## Available Scripts
+METAL-CASE-STUDY is a React application built using a TypeScript template. This project utilizes Material-UI (MUI) for the UI components, Redux Toolkit for state management, and `json-server` to simulate a backend server for API requests. The application provides a user-friendly interface to interact with the data fetched from the mock server.
 
-In the project directory, you can run:
+## Installation and Setup Instructions
 
-### `yarn start`
+To get started with the project, clone the repository from GitHub by running `git clone https://github.com/zainarshad45122/metal-case-study` and navigate to the project directory using `cd METAL-CASE-STUDY`. Install all necessary dependencies using Yarn by running `yarn install`. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The application uses `json-server` to provide a mock backend server that serves API endpoints. To run the server, use the command `node server.js`. By default, the server will run on `http://localhost:3000`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To start the React application, run `yarn start`. The React development server will run by default on `http://localhost:3001` (or a different port if `3000` is occupied). To run unit tests for the application, use the command `yarn test`, which will execute the tests in watch mode.
 
-### `yarn test`
+## Decisions and Assumptions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **UI Framework**: Material-UI (MUI) was chosen because of its extensive library of customizable and ready-to-use components, aligning with modern design standards.
+- **State Management**: Redux Toolkit was selected for global state management due to its simplicity, scalability, and integration with TypeScript.
+- **Backend Mocking**: `json-server` was used to mock the backend API. This allows the development focus to remain on the frontend application while simulating a realistic data-fetching experience.
 
-### `yarn build`
+## Challenges Faced and Solutions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **CORS Issues**: While setting up the API server, CORS issues initially prevented the client from making API requests. This was resolved by including the `cors` package in the server configuration.
+- **Component Reusability**: One challenge was creating reusable components. This was addressed by organizing common components under `src/components/common`, ensuring that they are generic and can be reused across different parts of the application.
+- **State Management Complexity**: Managing complex state with Redux can be overwhelming. This was simplified using Redux Toolkit's Query  utilities, which streamlined the state management setup and maintained code cleanliness.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The project is structured to ensure modularity and separation of concerns:
 
-### `yarn eject`
+- **src**: Contains the main source code for the application.
+  - **assets**: Static files such as images and icons.
+  - **components/common**: Reusable UI components like `AppBar`, `DataTable`, `SideBar`, etc.
+  - **hooks**: Custom React hooks.
+  - **redux**: Contains Redux slices and store configuration.
+  - **services**: API service calls and utility functions.
+  - **theme**: Custom Material-UI theme configurations.
+  - **types**: TypeScript types and interfaces.
+  - **utility**: Helper functions and utility files.
+- **public**: Contains the `index.html` and other static assets.
+- **server.js**: Entry point for running the mock JSON server.
+- **package.json**: Lists all the dependencies and scripts for the project.
+- **.env**: Environment variables for configuration.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Key Dependencies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `react` and `typescript` are used as the core libraries for building the application.
+- `@mui/material` and `@mui/icons-material` are used for UI components and theming.
+- `@reduxjs/toolkit` and `react-redux` are used for state management.
+- `react-dnd` and `react-dnd-html5-backend` are used for drag-and-drop functionality.
+- `json-server` is used to mock a backend API.
+- `@testing-library/react`, `@testing-library/jest-dom`, and other testing libraries are used for unit testing.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+For a complete list of dependencies, refer to the `package.json` file.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## How to Contribute
 
-## Learn More
+To contribute to this project, fork the repository and create a new branch using `git checkout -b feature/your-feature`. Commit your changes with `git commit -m 'Add some feature'` and push to the branch using `git push origin feature/your-feature`. Finally, open a pull request to merge your changes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For any questions or suggestions, please feel free to contact us at [zainarhad45122@gmail.com].

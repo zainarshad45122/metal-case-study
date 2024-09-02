@@ -25,5 +25,4 @@ const customRender = (
 
 export * from "@testing-library/react"
 
-// Override render method with the custom one
 export { customRender as render }

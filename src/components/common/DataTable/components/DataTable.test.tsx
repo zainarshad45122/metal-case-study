@@ -1,35 +1,28 @@
-import { GridColDef } from "@mui/x-data-grid"
 import { fireEvent, render, screen } from "@testing-library/react"
 import React from "react"
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"
 
+import { mockColumns, mockRows } from "../../../../utility/mockData"
 import DataTable from "./DataTable"
 
-const mockRows = [
-  { id: 1, investor: "Investor A", hq: "HQ A", contact: "Contact A", notes: "Notes A", investments: 10, portfolio: 5 },
-  { id: 2, investor: "Investor B", hq: "HQ B", contact: "Contact B", notes: "Notes B", investments: 20, portfolio: 15 },
-]
-
-const mockColumns: GridColDef[] = [
-  { field: "investor", headerName: "Investor", width: 200 },
-  { field: "hq", headerName: "Investor HQs", width: 200 },
-  { field: "contact", headerName: "Contact Person", width: 150 },
-  { field: "notes", headerName: "Notes", width: 250 },
-  { field: "investments", headerName: "Lead Investments in Last 12 Months", type: "number", width: 250 },
-  { field: "portfolio", headerName: "%age Portfolio Marked as Lead", type: "number", width: 250 },
-]
-
 describe( "InvestorDataGrid Component", () => {
+  const renderWithDndProvider = ( component: React.ReactNode ) => {
+    return render( <DndProvider backend={ HTML5Backend }>{ component }</DndProvider> )
+  }
+
+  const onPageChangeMock = jest.fn()
   it( "renders correctly with provided props", () => {
-    render(
+    renderWithDndProvider(
       <DataTable
         rows={ mockRows }
         columns={ mockColumns }
         pageSize={ 10 }
-        pagination= { true }
+        pagination={ true }
         rowsPerPageOptions={ [ 10, 20, 50 ] }
         paginationMode="server"
-        onPageSizeChange={ () => {} }
-        onPageChange={ () => {} }
+        onPageSizeChange={ onPageChangeMock }
+        onPageChange={ onPageChangeMock }
         rowCount={ 2 }
         loading={ false }
       />
@@ -41,8 +34,36 @@ describe( "InvestorDataGrid Component", () => {
     expect( screen.getByText( "HQ A" ) ).toBeInTheDocument()
     expect( screen.getByText( "HQ B" ) ).toBeInTheDocument()
 
-    // Check if pagination controls are present
-    // expect( screen.getByRole( "button", { name: /page 1 of 1/i } ) ).toBeInTheDocument()
+    expect( screen.getAllByRole( "row" ) ).toHaveLength( mockRows.length + 1 ) 
+
+    expect(
+      screen.getByRole( "button", { name: /next page/i } )
+    ).toBeInTheDocument()
   } )
 
+  it( "handles pagination change", () => {
+    const onPageChangeMock = jest.fn()
+
+    renderWithDndProvider(
+      <DataTable
+        rows={ mockRows }
+        columns={ mockColumns }
+        pageSize={ 1 } // Setting pageSize to 1 for testing
+        pagination={ true }
+        rowsPerPageOptions={ [ 1, 10, 20, 50 ] }
+        paginationMode="server"
+        onPageSizeChange={ onPageChangeMock }
+        onPageChange={ onPageChangeMock }
+        rowCount={ 2 }
+        loading={ false }
+      />
+    )
+
+    // Simulate clicking the "Next Page" button
+    const nextPageButton = screen.getByRole( "button", { name: /next page/i } )
+    fireEvent.click( nextPageButton )
+
+    // Check if the onPageChange callback is called
+    expect( onPageChangeMock ).toHaveBeenCalled()
+  } )
 } )

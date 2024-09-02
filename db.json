@@ -49,6 +49,52 @@
           "total": 1313,
           "active": 5
         }
+      },
+      {
+        "id": 3,
+        "investor": {
+          "name": "SeedCamp",
+          "isInvestorApproved": false,
+          "image": "http://localhost:3000/images/company-logo.svg",
+          "additionalInfo": {
+            "website": "https://seedcamp.coms",
+            "foundedYear": 2007
+          }
+        },
+        "hq": "United Kingdom",
+        "contact": "",
+        "notes": "",
+        "investments": {
+          "total": 2323,
+          "recent": 1
+        },
+        "portfolio": {
+          "total": 1313,
+          "active": 5
+        }
+      },
+      {
+        "id": 4,
+        "investor": {
+          "name": "SeedCamp",
+          "isInvestorApproved": false,
+          "image": "http://localhost:3000/images/company-logo.svg",
+          "additionalInfo": {
+            "website": "https://seedcamp.coms",
+            "foundedYear": 2007
+          }
+        },
+        "hq": "United Kingdom",
+        "contact": "",
+        "notes": "",
+        "investments": {
+          "total": 2323,
+          "recent": 1
+        },
+        "portfolio": {
+          "total": 1313,
+          "active": 5
+        }
       }
     ]
   }

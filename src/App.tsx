@@ -1,10 +1,7 @@
-import "./App.css"
-
-import { Alert, Checkbox, Snackbar, Typography } from "@mui/material"
+import { Alert, CssBaseline, Snackbar, Typography } from "@mui/material"
 import { Box, IconButton } from "@mui/material"
 import { ThemeProvider } from "@mui/material/styles"
-import { GridColDef } from "@mui/x-data-grid"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { FilterToggleIcon } from "./assets"
 import DataTable from "./components/common/DataTable"
@@ -12,72 +9,27 @@ import SideBar from "./components/common/SideBar/SideBar"
 import useOnlineStatus from "./hooks/useOnlineStatus"
 import { useGetAllInvestorsQuery } from "./services/investors"
 import theme from "./theme/theme"
-
-export const investorColumns: GridColDef[] = [
-  {
-    field: "investor",
-    headerName: "Investor",
-    width: 250,
-    renderCell: ( params ) => {
-      const { isInvestorApproved, image, name } = params.row.investor
-      return (
-        <div style={ { display: "flex", alignItems: "center" } }>
-          <Checkbox color="primary" checked={ isInvestorApproved } />
-          { image && (
-            <img
-              src={ image }
-              alt={ name }
-              style={ { width: 40, height: 40, borderRadius: "50%", marginRight: 8 } }
-            />
-          ) }
-          <span>{ name }</span>
-        </div>
-      )
-    },
-  },
-  { field: "hq", headerName: "Investor HQs", width: 200 },
-  {
-    field: "contact",
-    headerName: "Contact Person",
-    width: 150,
-    renderCell: ( params ) => {
-      const contact = params.value
-      return <span>{ contact || "Add" }</span>
-    },
-  },
-  {
-    field: "notes",
-    headerName: "Notes",
-    width: 250,
-    renderCell: ( params ) => {
-      const notes = params.value
-      return <span>{ notes || "Add Notes +" }</span>
-    },
-  },
-  {
-    field: "investments",
-    headerName: "Lead Investments in Last 12 Months",
-    type: "number",
-    width: 250,
-  },
-  {
-    field: "portfolio",
-    headerName: "%age Portfolio Marked as Lead",
-    type: "number",
-    width: 250,
-  },
-]
+import { investorColumns } from "./utility/columns"
 
 function App() {
   const [ open, setOpen ] = useState<boolean>( false )
   const [ page, setPage ] = useState<number>( 1 )
   const [ pageSize, setPageSize ] = useState<number>( 10 )
+  const [ snackbarOpen, setSnackbarOpen ] = useState<boolean>( false )
+  const [ snackbarMessage, setSnackbarMessage ] = useState<string>( "" )
   const isOnline = useOnlineStatus()
 
   const { data, error, isLoading } = useGetAllInvestorsQuery( {
     page,
     limit: pageSize,
   } )
+
+  useEffect( () => {
+    if( error ) {
+      setSnackbarMessage( "Network error. Please try again later." )
+      setSnackbarOpen( true )
+    }
+  }, [ error ] )
 
   const handlePageChange = ( newPage: number ) => {
     setPage( newPage + 1 )
@@ -89,13 +41,11 @@ function App() {
   }
 
   const investors = data?.investors || []
-  if( error ) return <div>Error fetching data</div>
-
-  console.log( "data", data )
 
   return (
     <div>
       <ThemeProvider theme={ theme }>
+        <CssBaseline />
         <SideBar open={ open } onMenuClick={ () => setOpen( ! open ) }>
           <Box sx={ { padding: "20px", width: "100%" } }>
             <Box
@@ -103,7 +53,7 @@ function App() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                marginBottom: 4,
+                marginBottom: 2,
               } }
             >
               <Typography variant="h1" color="black">
@@ -122,7 +72,7 @@ function App() {
             </Box>
             <Box sx={ { height: 600, width: "100%" } }>
               <DataTable
-                rows={ investors } // Pass the investors array here
+                rows={ investors }
                 columns={ investorColumns }
                 pageSize={ pageSize }
                 rowsPerPageOptions={ [ 10, 20, 50 ] }
@@ -139,6 +89,15 @@ function App() {
           <Snackbar open={ ! isOnline } autoHideDuration={ 6000 }>
             <Alert severity="warning" sx={ { width: "100%" } }>
               You are currently offline. Please check your internet connection.
+            </Alert>
+          </Snackbar>
+
+          <Snackbar
+            open={ snackbarOpen }
+            onClose={ () => setSnackbarOpen( false ) }
+          >
+            <Alert severity="error" sx={ { width: "100%" } }>
+              { snackbarMessage }
             </Alert>
           </Snackbar>
         </SideBar>

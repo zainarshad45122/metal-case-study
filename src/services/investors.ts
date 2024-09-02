@@ -2,7 +2,6 @@ import { InvestorData, Investors, InvestorsResponse } from "../types/investor"
 import { PaginationParams } from "../types/pagination"
 import { investorsApi } from "./investorsApi"
 
-// Function to get all investors
 const getAllInvestors = ( { page, limit }: PaginationParams ) => ( {
   url: `/investors?_limit=${ limit }&_page=${ page }`,
   method: "GET",
@@ -37,7 +36,6 @@ const investors = investorsApi.injectEndpoints( {
   overrideExisting: true,
 } )
 
-// Export the hook
 export const {
   useGetAllInvestorsQuery,
 } = investors
