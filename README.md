@@ -6,11 +6,19 @@ METAL-CASE-STUDY is a React application built using a TypeScript template. This 
 
 ## Installation and Setup Instructions
 
-To get started with the project, clone the repository from GitHub by running `git clone https://github.com/zainarshad45122/metal-case-study` and navigate to the project directory using `cd METAL-CASE-STUDY`. Install all necessary dependencies using Yarn by running `yarn install`. 
+To get started with the project, clone the repository from GitHub by running `git clone https://github.com/zainarshad45122/metal-case-study` and navigate to the project directory using `cd METAL-CASE-STUDY`. 
 
-The application uses `json-server` to provide a mock backend server that serves API endpoints. To run the server, use the command `node server.js`. By default, the server will run on `http://localhost:3000`.
+Install all necessary dependencies using Yarn by running `yarn install`. 
 
-To start the React application, run `yarn start`. The React development server will run by default on `http://localhost:3001` (or a different port if `3000` is occupied). To run unit tests for the application, use the command `yarn test`, which will execute the tests in watch mode.
+The application uses `json-server` to provide a mock backend server that serves API endpoints. 
+
+To run the server, use the command `node server.js`. By default, the server will run on `http://localhost:3000`.
+
+To start the React application, run `yarn start`. 
+
+The React development server will run by default on `http://localhost:3001` (or a different port if `3000` is occupied). To run unit tests for the application, use the command `yarn test`, which will execute the tests in watch mode.
+
+Make Sure baseQuery file has the right link for which port you run the json-server on. 
 
 ## Decisions and Assumptions
 
