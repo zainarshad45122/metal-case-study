@@ -48,7 +48,6 @@ The project is structured to ensure modularity and separation of concerns:
 - **public**: Contains the `index.html` and other static assets.
 - **server.js**: Entry point for running the mock JSON server.
 - **package.json**: Lists all the dependencies and scripts for the project.
-- **.env**: Environment variables for configuration.
 
 ## Key Dependencies
 
